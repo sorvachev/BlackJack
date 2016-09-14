@@ -1,6 +1,11 @@
 /**
  * Created by sakic on 9/14/16.
  */
+import model.Card;
+import model.Game;
+import model.GameResult;
+import model.Hand;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -123,4 +128,31 @@ public class AppletUI extends JApplet {
             }
         });
 
+        private void drawGameState() {
+            drawCardsAndScore(playerState, "Player", game.deal.getPlayerHand());
+            drawCardsAndScore(dealerState, "Dealer", game.deal.getDealerHand());
+
+            StringBuffer score = new StringBuffer("<html>score:<br>");
+            for (Entry<GameResult, Integer> entry : game.agreggatedResults
+                    .entrySet()) {
+                score.append("&nbsp;&nbsp;&nbsp;" + entry.getKey() + ": "
+                        + entry.getValue() + "<br>");
+            }
+            score.append("</html>");
+            scoreLabel.setText(score.toString());
+
+            repaint();
+        }
+
+        private void drawCardsAndScore(JPanel state, String side, Hand hand) {
+            state.removeAll();
+            state.add(new JLabel(side + ": "));
+            for (Card card : hand) {
+                JLabel label = new JLabel(card.toString());
+                label.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+                state.add(label);
+            }
+            state.add(new JLabel(": " + hand.getScore()));
+            state.revalidate();
+        }
     }
