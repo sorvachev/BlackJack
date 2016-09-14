@@ -5,5 +5,6 @@ package model;
  */
 public class Hand {
 private Card[] cards;
-
+public void add(Card card) {}
+public int getScore() {return 0;}
 }

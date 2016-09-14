@@ -27,7 +27,7 @@ public class Deal {
     }
 
     public void hit() {
-        if (game.getState() != GameResult.NONE) {
+        if (game.getStatus() != GameResult.NONE) {
             return;
         }
         playerHand.add(deck.getNewCard());
@@ -37,7 +37,7 @@ public class Deal {
     }
 
     public void stand() {
-        if (game.getState() != GameResult.NONE) {
+        if (game.getStatus() != GameResult.NONE) {
             return;
         }
         take_for_dealer();
@@ -58,15 +58,15 @@ public class Deal {
     }
 
     private void busted() {
-        game.setState(GameResult.BUSTED);
+        game.setStatus(GameResult.BUSTED);
     }
 
     private void push() {
-        game.setState(GameResult.PUSH);
+        game.setStatus(GameResult.PUSH);
     }
 
     public void win() {
-        game.setState(GameResult.WIN);
+        game.setStatus(GameResult.WIN);
     }
 
     public Hand getDealerHand() {
